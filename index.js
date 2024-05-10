@@ -13,8 +13,8 @@ mongoose
   .then(() => {
     console.log("connected");
   })
-  .catch(() => {
-    console.log("not connected");
+  .catch((error) => {
+    console.log("not connected", error);
   });
 
 //mongodb+srv://alilebbar94:<password>@cluster0.3dfzznv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
