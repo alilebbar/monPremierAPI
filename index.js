@@ -1,11 +1,14 @@
 const express = require("express");
-
-const app = express();
-
+const soketIo = require("socket.io");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const Articale = require("./models/Articale.js");
 
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
+app.use(express.json());
 mongoose
   .connect(
     "mongodb+srv://alilebbar94:mloolm123321@cluster0.3dfzznv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
@@ -25,8 +28,6 @@ app.listen(3000, () => {
   console.log("j'entend le port 3000");
 });
 // recuperer les parametres avec l'option body
-
-app.use(express.json());
 
 app.get("/sayHello", (req, res) => {
   const name = req.body.name;
@@ -78,6 +79,14 @@ app.post("/Articale", async (req, res) => {
   await newArticale.save();
   //res.send("post");
   res.json(articale);
+});
+
+io.on("connection", (socket) => {
+  console.log("New client connected");
+
+  socket.on("disconnect", () => {
+    console.log("Client disconnected");
+  });
 });
 
 app.get("/Articale", async (req, res) => {
