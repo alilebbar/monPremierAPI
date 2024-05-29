@@ -24,8 +24,9 @@ mongoose
 
 app.use(cors());
 
-app.listen(3000, () => {
-  console.log("j'entend le port 3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 // recuperer les parametres avec l'option body
 
@@ -77,8 +78,9 @@ app.post("/Articale", async (req, res) => {
   newArticale.body = articale.body;
   newArticale.numberOfLike = articale.numberOfLike;
   await newArticale.save();
+  io.emit("newArticale", newArticale);
   //res.send("post");
-  res.json(articale);
+  res.status(201).json(articale);
 });
 
 io.on("connection", (socket) => {
