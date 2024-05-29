@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 const mongoose = require("mongoose");
-
+const cors = require("cors");
 const Articale = require("./models/Articale.js");
 
 mongoose
@@ -18,6 +18,8 @@ mongoose
   });
 
 //mongodb+srv://alilebbar94:<password>@cluster0.3dfzznv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+app.use(cors());
 
 app.listen(3000, () => {
   console.log("j'entend le port 3000");
