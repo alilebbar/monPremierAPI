@@ -1,6 +1,6 @@
 const express = require("express");
 const http = require("http");
-const soketIo = require("socket.io");
+const socketIo = require("socket.io");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const Articale = require("./models/Articale.js");
